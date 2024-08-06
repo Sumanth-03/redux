@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const Acknowledge = () => {
   const location = useLocation();
@@ -12,13 +13,14 @@ const Acknowledge = () => {
       <div className="p-8 rounded-3xl shadow-md">
         <h2 className="text-2xl text-center mb-6 font-bold">Thank You</h2>
         <p className="text-center">We have received your message:</p>
-        <ul className="mt-4">
-          <li><strong>Full Name:</strong> {formData.fullname}</li>
-          <li><strong>Email:</strong> {formData.email}</li>
-          <li><strong>Phone:</strong> {formData.phone}</li>
-          <li><strong>Message:</strong> {formData.message}</li>
-          <li><strong>Favorite Color:</strong> <span style={{ color: formData.color }}>{formData.color}</span></li>
+        <ul className="mt-4 flex flex-col mb-10">
+          {
+            Object.entries(formData).map(([key, value]) => (
+            <li key={key} className="mb-2 bg-slate-100 rounded-xl p-3">{key} : {value}</li>
+          ))
+          }
         </ul>
+        <NavLink to='/' className='px-5 p-2 rounded-xl hover:bg-gray-300 shadow-inner float-right'>Go back to Home</NavLink>
       </div>
     </div>
   );

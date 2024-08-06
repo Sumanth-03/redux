@@ -15,6 +15,19 @@ export const postFormData = createAsyncThunk(
       };
   }
 )
+export const postFormData2 = createAsyncThunk(
+  'form/postFormData',
+  async(formData,{rejectWithValue}) => {
+      try{
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', formData)
+        console.log(response ,formData)
+        return response.data
+      }     
+      catch(error) {
+        return(rejectWithValue(error))
+      };
+  }
+)
 
 
 export const getData = createAsyncThunk(
