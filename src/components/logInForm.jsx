@@ -1,13 +1,14 @@
-import { hasFormSubmit } from "@testing-library/user-event/dist/utils";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { setData } from "../store/userData";
 import { logIn } from "../store/Auth";
+import { fetchPrimaryColor } from "../store/colorSlice";
 
 function LogInForm (){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const dispatch = useDispatch()
+    const primaryColor = useSelector((state) => state.color.primaryColor);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -21,8 +22,19 @@ function LogInForm (){
         }
         
     }
+    
+    useEffect(()=>{
+        dispatch(fetchPrimaryColor());
+    },[dispatch])
+
+    useEffect(() => {
+        if (primaryColor) {
+            document.documentElement.style.setProperty('--primary-color', primaryColor);
+        }
+    }, [primaryColor]);
+
     return(
-        <div className="flex  flex-col justify-center justify-items-center mt-40 bg-slate-300 shadow-lg md:w-[40%] rounded-xl m-auto p-10">
+        <div className="flex  flex-col justify-center justify-items-center mt-40 bg- shadow-lg md:w-[40%] rounded-xl m-auto p-10 bg-primary">
         <h1 className="font-bold text-xl m-auto">Log In</h1><br></br>
         <form className="flex flex-col justify-center space-y-4" onSubmit={handleSubmit}>
             <input name="name" type="text" 

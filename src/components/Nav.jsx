@@ -14,7 +14,7 @@ function Nav (){
         dispatch(getData(navigate))
     }
     return(
-        <nav className="fixed top-0  p-4 m-0 bg-slate-200 w-screen flex flex-row justify-end items-center ">
+        <nav className="fixed top-0  p-4 m-0 bg-primary w-screen flex flex-row justify-end items-center ">
             <NavLink to='/' className='mr-auto'>
             <h1 className="font-extrabold text-3xl p-2 m-2 mr-auto">Redux</h1>
             </NavLink>
